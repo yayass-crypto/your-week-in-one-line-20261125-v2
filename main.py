@@ -47,6 +47,8 @@ def gate(line):
         problems.append("line is only white space")
     if "\n" in line or "\r" in line:
         problems.append("line must be a single line")
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in line):
+        problems.append("line must not contain control characters")
     try:
         line.encode("utf-8")
     except UnicodeEncodeError:
